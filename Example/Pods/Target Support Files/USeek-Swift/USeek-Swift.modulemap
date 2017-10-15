@@ -1,0 +1,6 @@
+framework module USeek_Swift {
+  umbrella header "USeek-Swift-umbrella.h"
+
+  export *
+  module * { export * }
+}

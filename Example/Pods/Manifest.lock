@@ -1,0 +1,16 @@
+PODS:
+  - USeek-Swift (0.1.0)
+
+DEPENDENCIES:
+  - USeek-Swift (from `../`)
+
+EXTERNAL SOURCES:
+  USeek-Swift:
+    :path: ../
+
+SPEC CHECKSUMS:
+  USeek-Swift: d10590918ee8da47ee83d1949094ebc73cf19d7d
+
+PODFILE CHECKSUM: 4b06bd290398fc2f6661f45ac6b3e2091c635f45
+
+COCOAPODS: 1.2.1

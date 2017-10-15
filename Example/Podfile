@@ -1,0 +1,11 @@
+use_frameworks!
+
+target 'USeek-Swift_Example' do
+  pod 'USeek-Swift', :path => '../'
+
+  target 'USeek-Swift_Tests' do
+    inherit! :search_paths
+
+    
+  end
+end
