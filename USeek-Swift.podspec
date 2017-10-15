@@ -31,7 +31,7 @@ This Pod library is designed to help developers use USeek Library easily.
   s.ios.deployment_target = '10.0'
 
   s.source_files = 'USeek-Swift/Classes/**/*.swift'
-  s.resources = ['USeek/Assets/**/*', 'USeek/Classes/**/*.xib']
+  s.resources = ['USeek-Swift/Assets/**/*', 'USeek-Swift/Classes/**/*.xib']
 
   # s.resource_bundles = {
   #   'USeek-Swift' => ['USeek-Swift/Assets/*.png']
