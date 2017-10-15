@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_0" orientation="landscape">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="USeekPlayerViewController" customModule="USeekSwiftDemo" customModuleProvider="target">
+            <connections>
+                <outlet property="closeButton" destination="C1Y-3o-qvR" id="dzY-h0-aPM"/>
+                <outlet property="loadingMaskView" destination="m8M-5Y-Ipg" id="fk4-lJ-0pb"/>
+                <outlet property="loadingTitleLabel" destination="tB4-qf-67X" id="STt-Ep-tHl"/>
+                <outlet property="view" destination="Cii-oH-8oQ" id="tKG-6J-dwM"/>
+                <outlet property="webView" destination="gE3-C7-inL" id="8aZ-7g-s76"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="Cii-oH-8oQ">
+            <rect key="frame" x="0.0" y="0.0" width="568" height="320"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gE3-C7-inL" customClass="USeekWebView" customModule="USeekSwiftDemo" customModuleProvider="target">
+                    <rect key="frame" x="0.0" y="0.0" width="568" height="320"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <connections>
+                        <outlet property="delegate" destination="-1" id="ndT-Ic-cS1"/>
+                    </connections>
+                </webView>
+                <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="m8M-5Y-Ipg" userLabel="View - Loading Mask">
+                    <rect key="frame" x="0.0" y="0.0" width="568" height="320"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Please wait while loading..." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tB4-qf-67X" userLabel="Label - Loading Title">
+                            <rect key="frame" x="20" y="30" width="528" height="260"/>
+                            <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="13"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="0.75" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstItem="tB4-qf-67X" firstAttribute="leading" secondItem="m8M-5Y-Ipg" secondAttribute="leading" constant="20" id="Y2B-q8-p76"/>
+                        <constraint firstItem="tB4-qf-67X" firstAttribute="top" secondItem="m8M-5Y-Ipg" secondAttribute="top" constant="30" id="ZEm-li-8vw"/>
+                        <constraint firstAttribute="bottom" secondItem="tB4-qf-67X" secondAttribute="bottom" constant="30" id="d1q-Ji-Cv4"/>
+                        <constraint firstAttribute="trailing" secondItem="tB4-qf-67X" secondAttribute="trailing" constant="20" id="vMd-bI-7bC"/>
+                    </constraints>
+                </view>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="C1Y-3o-qvR" userLabel="Button - Close">
+                    <rect key="frame" x="532" y="20" width="24" height="24"/>
+                    <constraints>
+                        <constraint firstAttribute="width" secondItem="C1Y-3o-qvR" secondAttribute="height" multiplier="1:1" id="EFI-Af-Uev"/>
+                        <constraint firstAttribute="width" constant="24" id="RtH-Hj-MYs"/>
+                    </constraints>
+                    <state key="normal" image="useek-button-close"/>
+                    <connections>
+                        <action selector="onCloseButtonClick:" destination="-1" eventType="touchUpInside" id="cFb-1N-fFw"/>
+                    </connections>
+                </button>
+            </subviews>
+            <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="C1Y-3o-qvR" secondAttribute="trailing" constant="12" id="0uA-KY-FiB"/>
+                <constraint firstItem="m8M-5Y-Ipg" firstAttribute="height" secondItem="Cii-oH-8oQ" secondAttribute="height" id="57R-1D-DJy"/>
+                <constraint firstItem="gE3-C7-inL" firstAttribute="centerX" secondItem="Cii-oH-8oQ" secondAttribute="centerX" id="A6Q-M0-UR9"/>
+                <constraint firstItem="m8M-5Y-Ipg" firstAttribute="centerX" secondItem="Cii-oH-8oQ" secondAttribute="centerX" id="Ckl-05-aYi"/>
+                <constraint firstItem="m8M-5Y-Ipg" firstAttribute="centerY" secondItem="Cii-oH-8oQ" secondAttribute="centerY" id="Ekg-dB-gTM"/>
+                <constraint firstItem="m8M-5Y-Ipg" firstAttribute="width" secondItem="Cii-oH-8oQ" secondAttribute="width" id="FJA-5T-1Fc"/>
+                <constraint firstItem="C1Y-3o-qvR" firstAttribute="top" secondItem="Cii-oH-8oQ" secondAttribute="top" constant="20" id="OKp-bO-LI4"/>
+                <constraint firstItem="gE3-C7-inL" firstAttribute="centerY" secondItem="Cii-oH-8oQ" secondAttribute="centerY" id="V2C-tN-ZME"/>
+                <constraint firstItem="gE3-C7-inL" firstAttribute="height" secondItem="Cii-oH-8oQ" secondAttribute="height" id="VaI-Qu-W1t"/>
+                <constraint firstItem="gE3-C7-inL" firstAttribute="width" secondItem="Cii-oH-8oQ" secondAttribute="width" id="YhB-zc-JpU"/>
+            </constraints>
+        </view>
+    </objects>
+    <resources>
+        <image name="useek-button-close" width="40" height="40"/>
+    </resources>
+</document>

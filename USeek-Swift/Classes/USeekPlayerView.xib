@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="USeekPlayerView" customModule="USeekSwiftDemo" customModuleProvider="target">
+            <connections>
+                <outlet property="loadingMaskView" destination="r7s-aE-fiO" id="IeU-8q-xro"/>
+                <outlet property="loadingTitleLabel" destination="sUJ-Ty-Ye1" id="HOe-TL-d6h"/>
+                <outlet property="view" destination="CeX-ww-qVc" id="X7A-DH-tdm"/>
+                <outlet property="webView" destination="xh0-rX-NGg" id="rG9-rh-ASL"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="CeX-ww-qVc">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="240"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xh0-rX-NGg" customClass="USeekWebView" customModule="USeekSwiftDemo" customModuleProvider="target">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="240"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <connections>
+                        <outlet property="delegate" destination="-1" id="AKe-Z9-Fng"/>
+                    </connections>
+                </webView>
+                <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="r7s-aE-fiO" userLabel="View - Loading Mask">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="240"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Please wait while loading..." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sUJ-Ty-Ye1" userLabel="Label - Loading Title">
+                            <rect key="frame" x="20" y="30" width="280" height="180"/>
+                            <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="13"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="0.75" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="trailing" secondItem="sUJ-Ty-Ye1" secondAttribute="trailing" constant="20" id="1rE-XL-OcI"/>
+                        <constraint firstItem="sUJ-Ty-Ye1" firstAttribute="top" secondItem="r7s-aE-fiO" secondAttribute="top" constant="30" id="GkV-NW-jZR"/>
+                        <constraint firstAttribute="bottom" secondItem="sUJ-Ty-Ye1" secondAttribute="bottom" constant="30" id="Mk8-3q-6KQ"/>
+                        <constraint firstItem="sUJ-Ty-Ye1" firstAttribute="leading" secondItem="r7s-aE-fiO" secondAttribute="leading" constant="20" id="w81-GB-U09"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="xh0-rX-NGg" firstAttribute="width" secondItem="CeX-ww-qVc" secondAttribute="width" id="1IA-YQ-AxX"/>
+                <constraint firstItem="xh0-rX-NGg" firstAttribute="centerY" secondItem="CeX-ww-qVc" secondAttribute="centerY" id="Cl4-be-V7y"/>
+                <constraint firstItem="r7s-aE-fiO" firstAttribute="height" secondItem="CeX-ww-qVc" secondAttribute="height" id="QEg-cU-HFk"/>
+                <constraint firstItem="xh0-rX-NGg" firstAttribute="height" secondItem="CeX-ww-qVc" secondAttribute="height" id="hEO-p7-617"/>
+                <constraint firstItem="r7s-aE-fiO" firstAttribute="centerY" secondItem="CeX-ww-qVc" secondAttribute="centerY" id="oAS-SG-xJS"/>
+                <constraint firstItem="r7s-aE-fiO" firstAttribute="centerX" secondItem="CeX-ww-qVc" secondAttribute="centerX" id="sOP-yh-zZJ"/>
+                <constraint firstItem="r7s-aE-fiO" firstAttribute="width" secondItem="CeX-ww-qVc" secondAttribute="width" id="sPv-Sr-zfE"/>
+                <constraint firstItem="xh0-rX-NGg" firstAttribute="centerX" secondItem="CeX-ww-qVc" secondAttribute="centerX" id="wsK-Lb-bkM"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="6" y="-159"/>
+        </view>
+    </objects>
+</document>

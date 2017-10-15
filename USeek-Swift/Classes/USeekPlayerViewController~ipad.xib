@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="ipad9_7" orientation="landscape">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="USeekPlayerViewController" customModule="USeekSwiftDemo" customModuleProvider="target">
+            <connections>
+                <outlet property="closeButton" destination="1yQ-XI-GSw" id="AxP-h5-3i0"/>
+                <outlet property="loadingMaskView" destination="fmp-0v-8dj" id="DzF-qc-1b4"/>
+                <outlet property="loadingTitleLabel" destination="vmz-tU-8fA" id="TlN-xk-Ye3"/>
+                <outlet property="view" destination="xP2-vZ-ASV" id="I80-3n-5DC"/>
+                <outlet property="webView" destination="oWz-Au-jan" id="9Zz-fF-nRQ"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="xP2-vZ-ASV">
+            <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oWz-Au-jan" customClass="USeekWebView" customModule="USeekSwiftDemo" customModuleProvider="target">
+                    <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                </webView>
+                <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fmp-0v-8dj" userLabel="View - Loading Mask">
+                    <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Please wait while loading..." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vmz-tU-8fA" userLabel="Label - Loading Title">
+                            <rect key="frame" x="20" y="30" width="984" height="708"/>
+                            <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="20"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="0.75" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstItem="vmz-tU-8fA" firstAttribute="leading" secondItem="fmp-0v-8dj" secondAttribute="leading" constant="20" id="0N8-LL-RsH"/>
+                        <constraint firstAttribute="bottom" secondItem="vmz-tU-8fA" secondAttribute="bottom" constant="30" id="G0Q-yb-cvD"/>
+                        <constraint firstItem="vmz-tU-8fA" firstAttribute="top" secondItem="fmp-0v-8dj" secondAttribute="top" constant="30" id="Sd5-kl-kKa"/>
+                        <constraint firstAttribute="trailing" secondItem="vmz-tU-8fA" secondAttribute="trailing" constant="20" id="rUP-qb-PGA"/>
+                    </constraints>
+                </view>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1yQ-XI-GSw" userLabel="Button - Close">
+                    <rect key="frame" x="964" y="20" width="40" height="40"/>
+                    <constraints>
+                        <constraint firstAttribute="width" secondItem="1yQ-XI-GSw" secondAttribute="height" multiplier="1:1" id="Ig5-sd-vas"/>
+                        <constraint firstAttribute="width" constant="40" id="RkF-y2-cSV"/>
+                    </constraints>
+                    <state key="normal" image="useek-button-close"/>
+                    <connections>
+                        <action selector="onCloseButtonClick:" destination="-1" eventType="touchUpInside" id="K83-TK-1RY"/>
+                    </connections>
+                </button>
+            </subviews>
+            <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="fmp-0v-8dj" firstAttribute="width" secondItem="xP2-vZ-ASV" secondAttribute="width" id="7PR-VD-p5A"/>
+                <constraint firstItem="oWz-Au-jan" firstAttribute="width" secondItem="xP2-vZ-ASV" secondAttribute="width" id="CMO-Gh-Vcs"/>
+                <constraint firstItem="oWz-Au-jan" firstAttribute="height" secondItem="xP2-vZ-ASV" secondAttribute="height" id="Gbt-5w-PZ1"/>
+                <constraint firstItem="1yQ-XI-GSw" firstAttribute="top" secondItem="xP2-vZ-ASV" secondAttribute="top" constant="20" id="Hi4-4N-uTj"/>
+                <constraint firstItem="fmp-0v-8dj" firstAttribute="centerY" secondItem="xP2-vZ-ASV" secondAttribute="centerY" id="Ogl-DT-EVe"/>
+                <constraint firstItem="oWz-Au-jan" firstAttribute="centerY" secondItem="xP2-vZ-ASV" secondAttribute="centerY" id="abs-kB-Dea"/>
+                <constraint firstItem="fmp-0v-8dj" firstAttribute="centerX" secondItem="xP2-vZ-ASV" secondAttribute="centerX" id="bCa-mk-0rP"/>
+                <constraint firstItem="fmp-0v-8dj" firstAttribute="height" secondItem="xP2-vZ-ASV" secondAttribute="height" id="eEw-2p-udO"/>
+                <constraint firstAttribute="trailing" secondItem="1yQ-XI-GSw" secondAttribute="trailing" constant="20" id="lqR-24-xbV"/>
+                <constraint firstItem="oWz-Au-jan" firstAttribute="centerX" secondItem="xP2-vZ-ASV" secondAttribute="centerX" id="mq8-yY-n4d"/>
+            </constraints>
+        </view>
+    </objects>
+    <resources>
+        <image name="useek-button-close" width="40" height="40"/>
+    </resources>
+</document>

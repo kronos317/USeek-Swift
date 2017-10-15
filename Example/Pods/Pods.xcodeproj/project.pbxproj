@@ -52,10 +52,10 @@
 		6D4A1C9368FB7FD9A99D4185056CCAC2 /* USeek-Swift.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "USeek-Swift.xcconfig"; sourceTree = "<group>"; };
 		7F04F0C9B15B8AB35106CEEB8B67BA24 /* USeek-Swift-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "USeek-Swift-dummy.m"; sourceTree = "<group>"; };
 		8180F9F62801EC738513703EE39BFF98 /* Pods-USeek-Swift_Tests.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = "Pods-USeek-Swift_Tests.modulemap"; sourceTree = "<group>"; };
-		83149FE81F93035300FBB35E /* USeekPlayerViewController~iphone.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = "USeekPlayerViewController~iphone.xib"; path = "../../../../../example_apps/USeekSwiftDemo/USeekSwiftDemo/USeekSwiftDemo/Library/USeek/USeekPlayerViewController~iphone.xib"; sourceTree = "<group>"; };
-		83149FE91F93035300FBB35E /* USeekPlayerViewController~ipad.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = "USeekPlayerViewController~ipad.xib"; path = "../../../../../example_apps/USeekSwiftDemo/USeekSwiftDemo/USeekSwiftDemo/Library/USeek/USeekPlayerViewController~ipad.xib"; sourceTree = "<group>"; };
-		83149FEA1F93035400FBB35E /* USeekPlayerView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = USeekPlayerView.xib; path = ../../../../../example_apps/USeekSwiftDemo/USeekSwiftDemo/USeekSwiftDemo/Library/USeek/USeekPlayerView.xib; sourceTree = "<group>"; };
-		83149FEC1F93044F00FBB35E /* USeekAssets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = USeekAssets.xcassets; path = ../Assets/USeekAssets.xcassets; sourceTree = "<group>"; };
+		83149FED1F93F2ED00FBB35E /* USeekPlayerViewController~iphone.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = "USeekPlayerViewController~iphone.xib"; sourceTree = "<group>"; };
+		83149FEE1F93F2ED00FBB35E /* USeekPlayerViewController~ipad.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = "USeekPlayerViewController~ipad.xib"; sourceTree = "<group>"; };
+		83149FEF1F93F2ED00FBB35E /* USeekPlayerView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = USeekPlayerView.xib; sourceTree = "<group>"; };
+		83149FF11F93F34000FBB35E /* USeekAssets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = USeekAssets.xcassets; path = Assets/USeekAssets.xcassets; sourceTree = "<group>"; };
 		8388AA391F8A09F30088B953 /* USeekManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = USeekManager.swift; sourceTree = "<group>"; };
 		8388AA3B1F8A0A1F0088B953 /* USeekUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = USeekUtils.swift; sourceTree = "<group>"; };
 		8388AA3D1F8A0A330088B953 /* USeekWebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = USeekWebView.swift; sourceTree = "<group>"; };
@@ -112,9 +112,9 @@
 				8388AA3D1F8A0A330088B953 /* USeekWebView.swift */,
 				8388AA3F1F8A0A460088B953 /* USeekPlayerView.swift */,
 				8388AA411F8A0A540088B953 /* USeekPlayerViewController.swift */,
-				83149FEA1F93035400FBB35E /* USeekPlayerView.xib */,
-				83149FE91F93035300FBB35E /* USeekPlayerViewController~ipad.xib */,
-				83149FE81F93035300FBB35E /* USeekPlayerViewController~iphone.xib */,
+				83149FEF1F93F2ED00FBB35E /* USeekPlayerView.xib */,
+				83149FEE1F93F2ED00FBB35E /* USeekPlayerViewController~ipad.xib */,
+				83149FED1F93F2ED00FBB35E /* USeekPlayerViewController~iphone.xib */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -142,7 +142,7 @@
 		387E245F88DC02255D658B872F88414E /* USeek-Swift */ = {
 			isa = PBXGroup;
 			children = (
-				83149FEB1F93039F00FBB35E /* Assets */,
+				83149FF11F93F34000FBB35E /* USeekAssets.xcassets */,
 				0A9E185680D392D83309C33D11048615 /* Classes */,
 			);
 			path = "USeek-Swift";
@@ -180,15 +180,6 @@
 				194AD4AF399A58C6672DBCED2886E35E /* Products */,
 				388B360C793146B497BFD01A1662BF9B /* Targets Support Files */,
 			);
-			sourceTree = "<group>";
-		};
-		83149FEB1F93039F00FBB35E /* Assets */ = {
-			isa = PBXGroup;
-			children = (
-				83149FEC1F93044F00FBB35E /* USeekAssets.xcassets */,
-			);
-			name = Assets;
-			path = "New Group";
 			sourceTree = "<group>";
 		};
 		BC3CA7F9E30CC8F7E2DD044DD34432FC /* Frameworks */ = {
