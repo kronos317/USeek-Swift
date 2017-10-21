@@ -14,7 +14,7 @@ import UIKit
  * assigning an object to the USeekPlayerView's delegate property directly.
  *
  */
-@objc protocol USeekPlayerViewDelegate: NSObjectProtocol {
+@objc public protocol USeekPlayerViewDelegate: NSObjectProtocol {
     
     /**
      *
@@ -65,7 +65,7 @@ import UIKit
  * Now you can add the view as IBOutlet and use.
  *
  */
-class USeekPlayerView: UIView, UIWebViewDelegate {
+public class USeekPlayerView: UIView, UIWebViewDelegate {
     
     /**
      *
@@ -94,11 +94,11 @@ class USeekPlayerView: UIView, UIWebViewDelegate {
         self.initialize()
     }
     
-    required init?(coder aDecoder: NSCoder) {
+    required public init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
     
-    override func awakeFromNib() {
+    override public func awakeFromNib() {
         super.awakeFromNib()
         self.initialize()
     }
@@ -114,7 +114,7 @@ class USeekPlayerView: UIView, UIWebViewDelegate {
         self.isLoadingMaskHidden = false
     }
     
-    override func layoutSubviews() {
+    override public func layoutSubviews() {
         super.layoutSubviews()
     }
     
@@ -203,7 +203,7 @@ class USeekPlayerView: UIView, UIWebViewDelegate {
     
     // MARK: UIWebViewDelegate
     
-    func webViewDidStartLoad(_ webView: UIWebView) {
+    public func webViewDidStartLoad(_ webView: UIWebView) {
         print("USeekWebView didStartLoad")
         
         if self.status == .none {
@@ -219,7 +219,7 @@ class USeekPlayerView: UIView, UIWebViewDelegate {
         }
     }
     
-    func webViewDidFinishLoad(_ webView: UIWebView) {
+    public func webViewDidFinishLoad(_ webView: UIWebView) {
         print("USeekWebView didFinishLoad")
         
         if self.status != .load_failed && self.status != .loaded {
@@ -239,7 +239,7 @@ class USeekPlayerView: UIView, UIWebViewDelegate {
     }
     
     
-    func webView(_ webView: UIWebView, didFailLoadWithError error: Error) {
+    public func webView(_ webView: UIWebView, didFailLoadWithError error: Error) {
         print("USeekWebView didFailLoadWithError: \(error)")
         
         if self.status != .load_failed {

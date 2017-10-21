@@ -15,7 +15,7 @@ import UIKit
  *  - Request server for the points of certain user based on game id
  *
  */
-class USeekManager: NSObject {
+public class USeekManager: NSObject {
     
     /**
      * Returns USeekManager singleton object.
