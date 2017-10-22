@@ -89,7 +89,7 @@ public class USeekPlayerView: UIView, UIWebViewDelegate {
     var status: VideoLoadStatus = .none
     var isLoadingMaskHidden: Bool = false
     
-    override init(frame: CGRect) {
+    override public init(frame: CGRect) {
         super.init(frame: frame)
         self.initialize()
     }

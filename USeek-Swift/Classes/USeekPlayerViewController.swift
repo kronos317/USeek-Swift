@@ -98,7 +98,7 @@ public class USeekPlayerViewController: UIViewController, UIWebViewDelegate {
     var isLoadingMaskHidden: Bool = false
     var isCloseButtonHidden: Bool = false
     
-    init() {
+    public init() {
         let bundle = Bundle(for: type(of: self))
         let nibName = type(of: self).description().components(separatedBy: ".").last!
         super.init(nibName: nibName, bundle: bundle)
