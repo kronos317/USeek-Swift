@@ -99,10 +99,10 @@ public class USeekPlayerViewController: UIViewController, UIWebViewDelegate {
     var isCloseButtonHidden: Bool = false
     
     init() {
-        let className = String(describing: USeekPlayerViewController.self)
-        super.init(nibName: className, bundle: nil)
+        let bundle = Bundle(for: type(of: self))
+        let nibName = type(of: self).description().components(separatedBy: ".").last!
+        super.init(nibName: nibName, bundle: bundle)
         self.initialize()
-        
     }
     
     required public init?(coder aDecoder: NSCoder) {
@@ -159,7 +159,7 @@ public class USeekPlayerViewController: UIViewController, UIWebViewDelegate {
      * If any of publisher id or game id is not set, validation fails.
      *
      */
-    func validateConfiguration () -> Bool {
+    public func validateConfiguration () -> Bool {
         return self.webView.validateConfiguration()
     }
     

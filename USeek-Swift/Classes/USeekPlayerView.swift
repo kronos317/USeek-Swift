@@ -104,11 +104,25 @@ public class USeekPlayerView: UIView, UIWebViewDelegate {
     }
     
     func initialize () {
-        let className = String(describing: USeekPlayerView.self)
-        Bundle.main.loadNibNamed(className, owner: self, options: nil)
-        self.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        self.view.frame = CGRect(x: 0, y: 0, width: self.frame.size.width, height: self.frame.size.height)
+        let bundle = Bundle(for: type(of: self))
+        let nibName = type(of: self).description().components(separatedBy: ".").last!
+        let nib = UINib(nibName: nibName, bundle: bundle)
+        self.view = nib.instantiate(withOwner: self, options: nil).first as! UIView
+        
+        // use bounds not frame or it'll be offset
+        self.view.frame = bounds
+        // Adding custom subview on top of our view
         self.addSubview(self.view)
+        
+        self.view.translatesAutoresizingMaskIntoConstraints = false
+        self.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|[childView]|",
+                                                           options: [],
+                                                           metrics: nil,
+                                                           views: ["childView": self.view]))
+        self.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|[childView]|",
+                                                           options: [],
+                                                           metrics: nil,
+                                                           views: ["childView": self.view]))
         
         self.status = .none
         self.isLoadingMaskHidden = false
@@ -155,7 +169,7 @@ public class USeekPlayerView: UIView, UIWebViewDelegate {
      * If any of publisher id or game id is not set, validation fails.
      *
      */
-    func validateConfiguration () -> Bool {
+    public func validateConfiguration () -> Bool {
         return self.webView.validateConfiguration()
     }
     
