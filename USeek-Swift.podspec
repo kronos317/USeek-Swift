@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'USeek-Swift'
-  s.version          = '0.1.7'
+  s.version          = '0.4.1'
   s.summary          = 'USeek Swift Library'
 
 # This description is used to generate tags and improve search results.

@@ -66,7 +66,7 @@ class USeekUtils: NSObject {
             return false
         }
         
-        if candidate?.characters.count == 0 {
+        if candidate?.count == 0 {
             return false
         }
         

@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import WebKit
 
 /**
  *
@@ -65,7 +66,7 @@ import UIKit
  * Now you can add the view as IBOutlet and use.
  *
  */
-public class USeekPlayerView: UIView, UIWebViewDelegate {
+public class USeekPlayerView: UIView, WKNavigationDelegate, WKUIDelegate {
     
     /**
      *
@@ -83,11 +84,15 @@ public class USeekPlayerView: UIView, UIWebViewDelegate {
     weak public var delegate: USeekPlayerViewDelegate?
     
     @IBOutlet var view: UIView!
+    @IBOutlet weak var viewContainer: UIView!
     @IBOutlet weak var loadingMaskView: UIView!
-    @IBOutlet weak var webView: USeekWebView!
+    var webView: WKWebView!
     
     var status: VideoLoadStatus = .none
     var isLoadingMaskHidden: Bool = false
+    
+    var gameId: String = ""
+    var userId: String = ""
     
     override public init(frame: CGRect) {
         super.init(frame: frame)
@@ -126,6 +131,19 @@ public class USeekPlayerView: UIView, UIWebViewDelegate {
         
         self.status = .none
         self.isLoadingMaskHidden = false
+        
+        self.initializeWebview()
+    }
+    
+    func initializeWebview () {
+        let config: WKWebViewConfiguration = WKWebViewConfiguration()
+        config.allowsInlineMediaPlayback = true
+        config.mediaTypesRequiringUserActionForPlayback = WKAudiovisualMediaTypes.all
+        self.webView = WKWebView(frame: CGRect(x: 0, y: 0, width: self.viewContainer.frame.width, height: self.viewContainer.frame.height), configuration: config);
+        self.webView.autoresizingMask = [.flexibleWidth, .flexibleHeight];
+        self.webView.uiDelegate = self;
+        self.webView.navigationDelegate = self;
+        self.viewContainer.addSubview(self.webView);
     }
     
     override public func layoutSubviews() {
@@ -150,17 +168,24 @@ public class USeekPlayerView: UIView, UIWebViewDelegate {
             return
         }
         
-        self.webView.gameId = gameId
-        self.webView.userId = userId ?? ""
+        self.gameId = gameId
+        self.userId = userId ?? ""
         if self.validateConfiguration() == false {
             return
         }
         
-        self.webView.delegate = self
         self.status = .none
         self.loadingMaskView.isHidden = true
         
-        self.webView.loadVideo()
+        guard let url = self.generateVideoUrl() else {
+            print("Useek Configuration Invalid. Aborting...")
+            return
+        }
+        
+        let urlReq: URLRequest = URLRequest(url: url)
+        self.webView.isOpaque = false
+        self.webView.backgroundColor = UIColor.clear
+        self.webView.load(urlReq)
     }
     
     /**
@@ -170,7 +195,29 @@ public class USeekPlayerView: UIView, UIWebViewDelegate {
      *
      */
     public func validateConfiguration () -> Bool {
-        return self.webView.validateConfiguration()
+        if USeekUtils.validateString(USeekManager.sharedManager.publisherId) == false {
+            return false
+        }
+        if USeekUtils.validateString(self.gameId) == false {
+            return false
+        }
+        return true
+    }
+    
+    public func generateVideoUrl () -> URL? {
+        if self.validateConfiguration() == false {
+            return nil
+        }
+        
+        var urlString = "https://www.useek.com/sdk/1.0/\(USeekManager.sharedManager.publisherId)/\(self.gameId)/play"
+        if USeekUtils.validateString(self.userId) == true {
+            urlString = "\(urlString)?external_user_id=\(self.userId)"
+        }
+        if USeekUtils.validateUrl(urlString) == false {
+            return nil
+        }
+        
+        return URL(string: urlString)
     }
     
     public func setLoadingMaskHidden (_ hidden: Bool) {
@@ -217,7 +264,7 @@ public class USeekPlayerView: UIView, UIWebViewDelegate {
     
     // MARK: UIWebViewDelegate
     
-    public func webViewDidStartLoad(_ webView: UIWebView) {
+    public func webView(_ webView: WKWebView, didCommit navigation: WKNavigation!) {
         print("USeekWebView didStartLoad")
         
         if self.status == .none {
@@ -233,7 +280,7 @@ public class USeekPlayerView: UIView, UIWebViewDelegate {
         }
     }
     
-    public func webViewDidFinishLoad(_ webView: UIWebView) {
+    public func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
         print("USeekWebView didFinishLoad")
         
         if self.status != .load_failed && self.status != .loaded {
@@ -253,7 +300,7 @@ public class USeekPlayerView: UIView, UIWebViewDelegate {
     }
     
     
-    public func webView(_ webView: UIWebView, didFailLoadWithError error: Error) {
+    public func webView(_ webView: WKWebView, didFail navigation: WKNavigation!, withError error: Error) {
         print("USeekWebView didFailLoadWithError: \(error)")
         
         if self.status != .load_failed {

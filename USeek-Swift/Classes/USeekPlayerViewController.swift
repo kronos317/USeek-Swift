@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import WebKit
 
 /**
  *
@@ -73,7 +74,7 @@ import UIKit
  * Now you can add the view as IBOutlet and use.
  *
  */
-public class USeekPlayerViewController: UIViewController, UIWebViewDelegate {
+public class USeekPlayerViewController: UIViewController, WKNavigationDelegate, WKUIDelegate {
     
     /**
      *
@@ -90,13 +91,17 @@ public class USeekPlayerViewController: UIViewController, UIWebViewDelegate {
      */
     weak public var delegate: USeekPlayerViewControllerDelegate?
     
+    @IBOutlet weak var viewContainer: UIView!
     @IBOutlet weak var loadingMaskView: UIView!
-    @IBOutlet weak var webView: USeekWebView!
     @IBOutlet weak var closeButton: UIButton!
+    var webView: WKWebView!
     
     var status: VideoLoadStatus = .none
     var isLoadingMaskHidden: Bool = false
     var isCloseButtonHidden: Bool = false
+    
+    var gameId: String = ""
+    var userId: String = ""
     
     public init() {
         let bundle = Bundle(for: type(of: self))
@@ -117,11 +122,32 @@ public class USeekPlayerViewController: UIViewController, UIWebViewDelegate {
             print("USeekPlayerViewController is not properly initiated. Aborting...")
             return
         }
+        
+        self.initializeWebview()
     }
     
     override public func viewDidLoad() {
         super.viewDidLoad()
         self.closeButton.isHidden = self.isCloseButtonHidden
+        
+        UIDevice.current.setValue(UIInterfaceOrientation.landscapeRight.rawValue, forKey: "orientation")
+    }
+    
+    func initializeWebview () {
+        let config: WKWebViewConfiguration = WKWebViewConfiguration()
+        config.allowsInlineMediaPlayback = true
+        config.mediaTypesRequiringUserActionForPlayback = WKAudiovisualMediaTypes.all
+        self.webView = WKWebView(frame: CGRect(x: 0, y: 0, width: self.viewContainer.frame.width, height: self.viewContainer.frame.height), configuration: config);
+        self.webView.autoresizingMask = [.flexibleWidth, .flexibleHeight];
+        self.webView.uiDelegate = self;
+        self.webView.navigationDelegate = self;
+        self.viewContainer.addSubview(self.webView);
+    }
+    
+    // Orientation
+    
+    override public var shouldAutorotate: Bool {
+        return true
     }
     
     /**
@@ -140,17 +166,24 @@ public class USeekPlayerViewController: UIViewController, UIWebViewDelegate {
             return
         }
         
-        self.webView.gameId = gameId
-        self.webView.userId = userId ?? ""
+        self.gameId = gameId
+        self.userId = userId ?? ""
         if self.validateConfiguration() == false {
             return
         }
         
-        self.webView.delegate = self
         self.status = .none
         self.loadingMaskView.isHidden = true
         
-        self.webView.loadVideo()
+        guard let url = self.generateVideoUrl() else {
+            print("Useek Configuration Invalid. Aborting...")
+            return
+        }
+        
+        let urlReq: URLRequest = URLRequest(url: url)
+        self.webView.isOpaque = false
+        self.webView.backgroundColor = UIColor.clear
+        self.webView.load(urlReq)
     }
     
     /**
@@ -160,7 +193,13 @@ public class USeekPlayerViewController: UIViewController, UIWebViewDelegate {
      *
      */
     public func validateConfiguration () -> Bool {
-        return self.webView.validateConfiguration()
+        if USeekUtils.validateString(USeekManager.sharedManager.publisherId) == false {
+            return false
+        }
+        if USeekUtils.validateString(self.gameId) == false {
+            return false
+        }
+        return true
     }
     
     public func setLoadingMaskHidden (_ hidden: Bool) {
@@ -168,6 +207,22 @@ public class USeekPlayerViewController: UIViewController, UIWebViewDelegate {
         if self.loadingMaskView != nil {
             self.loadingMaskView.isHidden = hidden
         }
+    }
+    
+    public func generateVideoUrl () -> URL? {
+        if self.validateConfiguration() == false {
+            return nil
+        }
+        
+        var urlString = "https://www.useek.com/sdk/1.0/\(USeekManager.sharedManager.publisherId)/\(self.gameId)/play"
+        if USeekUtils.validateString(self.userId) == true {
+            urlString = "\(urlString)?external_user_id=\(self.userId)"
+        }
+        if USeekUtils.validateUrl(urlString) == false {
+            return nil
+        }
+        
+        return URL(string: urlString)
     }
     
     /**
@@ -225,9 +280,9 @@ public class USeekPlayerViewController: UIViewController, UIWebViewDelegate {
         self.presentingViewController?.dismiss(animated: true, completion: nil)
     }
     
-    // MARK: UIWebViewDelegate
+    // MARK: WKNavigationDelegate
     
-    public func webViewDidStartLoad(_ webView: UIWebView) {
+    public func webView(_ webView: WKWebView, didCommit navigation: WKNavigation!) {
         print("USeekWebView didStartLoad")
         
         if self.status == .none {
@@ -243,7 +298,7 @@ public class USeekPlayerViewController: UIViewController, UIWebViewDelegate {
         }
     }
     
-    public func webViewDidFinishLoad(_ webView: UIWebView) {
+    public func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
         print("USeekWebView didFinishLoad")
         
         if self.status != .load_failed && self.status != .loaded {
@@ -262,7 +317,7 @@ public class USeekPlayerViewController: UIViewController, UIWebViewDelegate {
         }
     }
     
-    public func webView(_ webView: UIWebView, didFailLoadWithError error: Error) {
+    public func webView(_ webView: WKWebView, didFail navigation: WKNavigation!, withError error: Error) {
         print("USeekWebView didFailLoadWithError: \(error)")
         
         if self.status != .load_failed {
@@ -277,5 +332,5 @@ public class USeekPlayerViewController: UIViewController, UIWebViewDelegate {
             self.loadingMaskView.isHidden = true
         }
     }
-    
+
 }
